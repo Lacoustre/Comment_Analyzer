@@ -137,7 +137,7 @@ export default function CommentAnalysis() {
     setLanguageMismatch(false);
 
     try {
-      const response = await fetch('http://localhost:4000/api/analyze', {
+      const response = await fetch('https://server-v4bh.onrender.com/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text, selectedLanguage: language }),
