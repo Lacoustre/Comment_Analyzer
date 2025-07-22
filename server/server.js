@@ -259,16 +259,15 @@ app.post('/api/analyze', async (req, res) => {
       const smellPattern = /\b(you|wo)\s+(smell|ho)\s+(bad|very bad|bɔn|nka)\b/i;
       const containsSmellReference = smellPattern.test(lowerText);
 
-      // Special case for "you smell very bad" which should be detected as Twi
-      if (lowerText.includes('you smell very bad') || lowerText.includes('you smell bad')) {
-        // Check if there are other Twi words in the text
-        if (twiWordCount > 0 || containsTwiPhrases) {
-          return 'Twi (Ghana)';
-        }
-      }
-
+      // Don't treat smell phrases as language indicators
       const wordCount = text.split(/\s+/).length;
-      return (twiWordCount > 2 || (twiWordCount / wordCount) > 0.15 || containsTwiPhrases || containsSmellReference) ? 'Twi (Ghana)' : 'English';
+      
+      // If the text is only about smell and has no clear Twi indicators, treat as English
+      if (lowerText.includes('smell') && twiWordCount < 2) {
+        return 'English';
+      }
+      
+      return (twiWordCount > 2 || (twiWordCount / wordCount) > 0.15 || containsTwiPhrases) ? 'Twi (Ghana)' : 'English';
     };
     
 
