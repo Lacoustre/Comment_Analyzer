@@ -9,9 +9,82 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 640px) {
+  textarea, input, select {
+    font-size: 16px !important; /* Prevents iOS zoom on input focus */
+  }
+  
+  /* Improve tap targets on mobile */
+  button, a, select, input[type="checkbox"], input[type="radio"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Adjust spacing for mobile */
+  h1, h2, h3, h4, h5, h6 {
+    word-break: break-word;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent content shift when scrollbar appears */
+@supports (overflow: overlay) {
+  body {
+    overflow-y: overlay;
+  }
+}
+
+/* Fix for iOS 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Improve accessibility */
+:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Improve touch interactions */
+@media (hover: none) {
+  .hover\:scale-110:hover {
+    transform: none !important;
+  }
+  
+  .hover\:bg-blue-50:hover,
+  .hover\:bg-gray-100:hover,
+  .hover\:from-blue-700:hover,
+  .hover\:to-purple-700:hover {
+    background: inherit !important;
+  }
+  
+  .hover\:text-blue-600:hover,
+  .hover\:text-gray-300:hover,
+  .hover\:text-blue-400:hover {
+    color: inherit !important;
+  }
 }
