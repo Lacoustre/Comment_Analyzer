@@ -118,7 +118,7 @@ export default function CommentAnalyzerFooter() {
                   </div>
                   <div>
                     <span className="text-xs sm:text-sm md:text-base text-gray-300 hover:text-blue-400 transition-colors font-medium">
-                      info@commentanalyzer.com
+                      rabbiperez007@gmail.com
                     </span>
                     <p className="text-xs text-gray-500">General inquiries</p>
                   </div>
@@ -129,7 +129,7 @@ export default function CommentAnalyzerFooter() {
                     <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white" />
                   </div>
                   <div>
-                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">+1 (800) 555-1234</span>
+                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">+233550861566</span>
                     <p className="text-xs text-gray-500">Support hotline</p>
                   </div>
                 </a>
@@ -139,8 +139,8 @@ export default function CommentAnalyzerFooter() {
                     <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white" />
                   </div>
                   <div>
-                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">San Francisco</span>
-                    <p className="text-xs text-gray-500">California, USA</p>
+                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">Ashanti Region</span>
+                    <p className="text-xs text-gray-500">Kumasi, Ghana</p>
                   </div>
                 </a>
               </div>
