@@ -99,10 +99,19 @@ export default function CommentAnalysis() {
         setMobileMenuOpen(false);
       }
     };
+    
+    // Close menu when pressing escape key
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
 
     document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscKey);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscKey);
     };
   }, []);
 
@@ -248,25 +257,25 @@ export default function CommentAnalysis() {
         
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div id="mobile-menu" className="md:hidden bg-white border-b border-gray-200 shadow-sm">
-            <div className="px-4 py-3 space-y-2">
+          <div id="mobile-menu" className="md:hidden absolute right-4 top-16 bg-white rounded-lg shadow-lg border border-gray-100 z-50 min-w-[200px] overflow-hidden animate-fadeIn">
+            <div className="py-2">
               <a 
                 href="#features" 
-                className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                className="block py-2.5 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition border-b border-gray-100"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Features
               </a>
               <a 
                 href="#how-it-works" 
-                className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                className="block py-2.5 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition border-b border-gray-100"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 How it works
               </a>
               <a 
                 href="#contact" 
-                className="block py-2 px-3 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                className="block py-2.5 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contact
