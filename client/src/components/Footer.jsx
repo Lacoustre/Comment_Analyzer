@@ -112,35 +112,35 @@ export default function CommentAnalyzerFooter() {
                 Get in Touch
               </h4>
               <div className="space-y-3 sm:space-y-4">
-                <a href="mailto:info@commentanalyzer.com" className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
+                <a href="mailto:rabbiperez007@gmail.com" className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
                   <div className="p-1.5 sm:p-2 bg-gray-800 rounded-lg group-hover:bg-blue-600 transition-colors">
                     <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white" />
                   </div>
                   <div>
                     <span className="text-xs sm:text-sm md:text-base text-gray-300 hover:text-blue-400 transition-colors font-medium">
-                      info@commentanalyzer.com
+                      rabbiperez007@gmail.com
                     </span>
                     <p className="text-xs text-gray-500">General inquiries</p>
                   </div>
                 </a>
                 
-                <a href="tel:+1-800-555-1234" className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
+                <a href="tel:+233550861566" className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
                   <div className="p-1.5 sm:p-2 bg-gray-800 rounded-lg group-hover:bg-green-600 transition-colors">
                     <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white" />
                   </div>
                   <div>
-                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">+1 (800) 555-1234</span>
+                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">+233550861566</span>
                     <p className="text-xs text-gray-500">Support hotline</p>
                   </div>
                 </a>
 
-                <a href="https://maps.google.com/?q=San+Francisco,CA" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
+                <a href="https://maps.google.com/?q=Kumasi,Ghana" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 sm:space-x-3 group cursor-pointer">
                   <div className="p-1.5 sm:p-2 bg-gray-800 rounded-lg group-hover:bg-purple-600 transition-colors">
                     <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white" />
                   </div>
                   <div>
-                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">San Francisco</span>
-                    <p className="text-xs text-gray-500">California, USA</p>
+                    <span className="text-xs sm:text-sm md:text-base text-gray-300 font-medium">Ashanti Region</span>
+                    <p className="text-xs text-gray-500">Kumasi, Ghana</p>
                   </div>
                 </a>
               </div>
