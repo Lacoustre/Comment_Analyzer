@@ -29,22 +29,24 @@ app.post('/api/analyze', async (req, res) => {
       
 
       const toxicWords = [
-
+        // English toxic words
         'hate', 'idiot', 'stupid', 'dumb', 'moron', 'retard', 'kill', 'die', 'ugly',
         'fat', 'loser', 'pathetic', 'worthless', 'trash', 'garbage', 'useless',
         'shut up', 'screw you', 'damn', 'hell', 'crap', 'ass', 'asshole', 'bitch',
         'bastard', 'fuck', 'shit', 'dick', 'pussy', 'cunt', 'whore', 'slut',
         'retarded', 'gay', 'fag', 'queer', 'homo', 'nigger', 'nigga', 'chink', 'spic',
         'kike', 'wetback', 'terrorist', 'nazi', 'racist', 'sexist', 'rape', 'disgusting',
+        'smell bad', 'smell very bad', 'you smell', 'you stink',
         
-
+        // Twi toxic words
         'kwasea', 'gyimigyimi', 'aboa', 'kwasia', 'obonsam', 'sɛbe', 'wo maame tw3', 
         'wo se', 'mede wo bɔ dam', 'wɔnini', 'soanni', 'odwan', 'ɔkwadu', 'akyiwade',
-        'gyimii', 'bodamfoɔ', 'ɔtafoc', 'ɔbonsam ba', 'ɔkwasiampanin', 'nkwasiasɛm'
+        'gyimii', 'bodamfoɔ', 'ɔtafoc', 'ɔbonsam ba', 'ɔkwasiampanin', 'nkwasiasɛm',
+        'wo ho bɔn', 'wo ho nka', 'bɔn paa', 'nka paa', 'wo bɔn'
       ];
       
       const positiveWords = [
-  
+        // English positive words
         'good', 'great', 'excellent', 'amazing', 'wonderful', 'fantastic', 'terrific',
         'outstanding', 'exceptional', 'superb', 'brilliant', 'awesome', 'fabulous',
         'incredible', 'marvelous', 'spectacular', 'splendid', 'stupendous', 'phenomenal',
@@ -52,14 +54,14 @@ app.post('/api/analyze', async (req, res) => {
         'thrilled', 'excited', 'enthusiastic', 'grateful', 'thankful', 'satisfied',
         'content', 'cheerful', 'joyful', 'elated', 'ecstatic', 'blissful',
         
-  
+        // Twi positive words
         'papa', 'eye', 'fɛ', 'ɔdɔ', 'ayɛ', 'anigye', 'nhyira', 'asomdwoe',
         'ayeyi', 'medaase', 'meda w\'ase', 'akwaaba', 'yiedie', 'nkwa', 'ahoɔden',
         'anuonyam', 'animuonyam', 'ahoɔfɛ', 'ahomka', 'ahosɛpɛw'
       ];
       
       const negativeWords = [
-  
+        // English negative words
         'bad', 'terrible', 'horrible', 'awful', 'dreadful', 'poor', 'subpar',
         'mediocre', 'disappointing', 'unsatisfactory', 'inadequate', 'inferior',
         'deficient', 'unacceptable', 'appalling', 'atrocious', 'abysmal', 'lousy',
@@ -67,7 +69,7 @@ app.post('/api/analyze', async (req, res) => {
         'upset', 'disappointed', 'frustrated', 'annoyed', 'irritated', 'angry', 'mad',
         'furious', 'enraged', 'disgusted', 'depressed', 'miserable',
         
-  
+        // Twi negative words
         'bɔne', 'ɛyɛ hu', 'ɛyɛ ya', 'mmusu', 'ɔhaw', 'abufuo', 'awerɛhow',
         'ɔtan', 'ɛyɛ tan', 'ɛyɛ nwonwa', 'ɛyɛ yaw', 'ɛyɛ basaa', 'ɛyɛ fi',
         'ɛyɛ atantanne', 'ɛyɛ aniwu', 'ɛyɛ ateetee', 'ɛyɛ atantannede'
@@ -94,12 +96,13 @@ app.post('/api/analyze', async (req, res) => {
       
 
       const criticalPhrases = [
-
+        // English critical phrases
         'fuck you', 'kill yourself', 'rape', 'die', 'go to hell',
         
-
+        // Twi critical phrases
         'wo maame tw3', 'wo se', 'mede wo bɔ dam', 'kwasia', 'gyimigyimi',
-        'wo yɛ aboa', 'me ko wu', 'wo bɛ wu', 'wo yɛ kwasea'
+        'wo yɛ aboa', 'me ko wu', 'wo bɛ wu', 'wo yɛ kwasea',
+        'wo ho bɔn paa', 'wo ho nka koraa'
       ];
       
       let hasCriticalPhrase = false;
@@ -135,7 +138,7 @@ app.post('/api/analyze', async (req, res) => {
       let sexuallyExplicitScore = 0;
       
 
-      const harassmentWords = ['idiot', 'stupid', 'dumb', 'moron', 'loser', 'pathetic', 'worthless', 'useless', 'ugly', 'disgusting', 'fat'];
+      const harassmentWords = ['idiot', 'stupid', 'dumb', 'moron', 'loser', 'pathetic', 'worthless', 'useless', 'ugly', 'disgusting', 'fat', 'smell bad', 'you smell', 'wo ho bɔn', 'wo bɔn'];
       const hateSpeechWords = ['hate', 'nigger', 'nigga', 'chink', 'spic', 'kike', 'wetback', 'terrorist', 'nazi', 'racist', 'sexist'];
       const profanityWords = ['fuck', 'shit', 'damn', 'hell', 'crap', 'ass', 'asshole', 'bitch', 'bastard'];
       const threatWords = ['kill', 'die', 'murder', 'suicide', 'rape'];
@@ -164,6 +167,14 @@ app.post('/api/analyze', async (req, res) => {
         threatScore += 50;
       }
       
+      // Special case for "you smell bad" or similar phrases in English or Twi
+      if (lowerText.includes('smell bad') || lowerText.includes('you smell') || 
+          lowerText.includes('wo ho bɔn') || lowerText.includes('wo bɔn') || 
+          lowerText.includes('ho nka')) {
+        harassmentScore += 25;
+        isToxic = true;
+        riskLevel = 'medium';
+      }
 
       harassmentScore = Math.min(harassmentScore, 100);
       hateSpeechScore = Math.min(hateSpeechScore, 100);
@@ -215,16 +226,22 @@ app.post('/api/analyze', async (req, res) => {
     
 
     const detectLanguage = (text) => {
-
+      // Common Twi words and phrases
       const twiWords = [
         'me', 'wo', 'yen', 'mo', 'won', 'ne', 'na', 'anaa', 'sɛ', 'yɛ', 'wɔ',
         'nti', 'ɛno', 'ɛnnɛ', 'ɔkyena', 'nnora', 'da', 'anadwo', 'anɔpa',
         'kwasea', 'gyimigyimi', 'aboa', 'kwasia', 'obonsam', 'sɛbe', 'wo maame tw3',
         'papa', 'eye', 'fɛ', 'ɔdɔ', 'ayɛ', 'anigye', 'nhyira', 'asomdwoe',
         'bɔne', 'ɛyɛ hu', 'ɛyɛ ya', 'mmusu', 'ɔhaw', 'abufuo', 'awerɛhow',
-        'akwaaba', 'yɛfrɛ me', 'mepa wo kyɛw', 'medaase', 'meda wo ase'
+        'akwaaba', 'yɛfrɛ me', 'mepa wo kyɛw', 'medaase', 'meda wo ase',
+        'bɔn', 'nka', 'ho'
       ];
       
+      // Common Twi phrases, especially those related to smell
+      const twiPhrases = [
+        'wo ho bɔn', 'wo ho nka', 'bɔn paa', 'nka paa',
+        'wo ho nka me', 'wo ho bɔn paa', 'wo bɔn'
+      ];
 
       const lowerText = text.toLowerCase();
       let twiWordCount = 0;
@@ -235,9 +252,23 @@ app.post('/api/analyze', async (req, res) => {
         }
       });
       
+      // Check for specific Twi phrases
+      const containsTwiPhrases = twiPhrases.some(phrase => lowerText.includes(phrase));
+      
+      // Check for "you smell bad" or similar phrases that might be Twi translations
+      const smellPattern = /\b(you|wo)\s+(smell|ho)\s+(bad|very bad|bɔn|nka)\b/i;
+      const containsSmellReference = smellPattern.test(lowerText);
+
+      // Special case for "you smell very bad" which should be detected as Twi
+      if (lowerText.includes('you smell very bad') || lowerText.includes('you smell bad')) {
+        // Check if there are other Twi words in the text
+        if (twiWordCount > 0 || containsTwiPhrases) {
+          return 'Twi (Ghana)';
+        }
+      }
 
       const wordCount = text.split(/\s+/).length;
-      return (twiWordCount > 2 || (twiWordCount / wordCount) > 0.15) ? 'Twi (Ghana)' : 'English';
+      return (twiWordCount > 2 || (twiWordCount / wordCount) > 0.15 || containsTwiPhrases || containsSmellReference) ? 'Twi (Ghana)' : 'English';
     };
     
 
