@@ -8,7 +8,7 @@ const port = process.env.PORT || 4000;
 
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://client-0zs8.onrender.com',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
